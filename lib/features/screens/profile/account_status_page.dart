@@ -1,0 +1,61 @@
+import "package:flutter/material.dart";
+import "package:foodi_chefs/core/constants/colors.dart";
+
+class AccountStatusPendingPage extends StatefulWidget {
+  const AccountStatusPendingPage({super.key});
+
+  @override
+  State<AccountStatusPendingPage> createState() =>
+      _AccountStatusPendingPageState();
+}
+
+class _AccountStatusPendingPageState extends State<AccountStatusPendingPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(secondaryColor),
+      body: Column(
+        children: [
+          Padding(padding: const EdgeInsets.all(18.0), child: Text("Yum X")),
+          SizedBox(height: 20),
+          Text(
+            "Pending",
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Color(primaryColor),
+            ),
+          ),
+          Text("You will get an email once you have been approved"),
+          Expanded(
+            child: Center(
+              child: Container(
+                height: 300,
+                width: 300,
+                decoration: BoxDecoration(
+                  color: Color(secondaryColor).withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(150),
+                ),
+                child: Container(
+                  height: 250,
+                  width: 250,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(125),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.check_circle,
+                      color: Color(secondaryColor),
+                      size: 100,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
