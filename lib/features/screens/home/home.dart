@@ -201,23 +201,29 @@ class _HomeTabState extends State<HomeTab> {
           crossAxisCount: 2,
           childAspectRatio: 5 / 4,
           children: [
-            Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Color(lightSecondaryColor),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    "20",
-                    style: TextStyle(
-                      color: Color(secondaryColor),
-                      fontSize: 30,
+            GestureDetector(
+              onDoubleTap: _showOrders,
+              child: Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Color(lightSecondaryColor),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      "20",
+                      style: TextStyle(
+                        color: Color(secondaryColor),
+                        fontSize: 30,
+                      ),
                     ),
-                  ),
-                  Text("Running Orders", style: TextStyle(color: Colors.grey)),
-                ],
+                    Text(
+                      "Running Orders",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(
