@@ -22,10 +22,7 @@ class IngredientIcon extends StatelessWidget {
         Text(
           "$label${allergy ? " (Allergy)" : ""}",
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 12,
-            color: allergy ? Colors.red : Colors.black,
-          ),
+          style: TextStyle(fontSize: 12, color: Colors.grey),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodi_chefs/core/constants/colors.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
@@ -11,20 +12,47 @@ class _NotificationsPageState extends State<NotificationsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(primaryColor),
       appBar: AppBar(
+        backgroundColor: Color(primaryColor),
+        surfaceTintColor: Color(primaryColor),
         elevation: 0,
-        leading: Icon(Icons.arrow_back_ios),
+        leading: GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: Icon(Icons.arrow_back_ios, color: Color(secondaryColor)),
+        ),
         title: Text("Notifications"),
       ),
       body: ListView.builder(
+        itemCount: 3,
         itemBuilder:
-            (context, index) => Padding(
-              padding: const EdgeInsets.all(8.0),
+            (context, index) => Card(
+              elevation: 0,
+              color: Color(lightSecondaryColor),
               child: ListTile(
-                leading: CircleAvatar(radius: 20, child: Placeholder()),
+                leading: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    shape: BoxShape.circle,
+                  ),
+                ),
                 title: Text("Tahir Ibrahim"),
-                subtitle: Text("Agreed to cancel"),
-                trailing: Text("20 mins ago"),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Agreed to cancel",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      "20 mins ago",
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                  ],
+                ),
+                isThreeLine: true,
               ),
             ),
       ),

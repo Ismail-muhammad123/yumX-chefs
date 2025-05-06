@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:foodi_chefs/core/di/service_locator.dart';
 import 'package:foodi_chefs/features/screens/authentication/login_screen.dart';
 
 void main() {
+  setupLocator();
   runApp(const MyApp());
 }
 

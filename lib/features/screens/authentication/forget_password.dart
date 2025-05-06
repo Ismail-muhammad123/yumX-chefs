@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodi_chefs/core/widgets/form_field.dart';
 import 'package:foodi_chefs/core/widgets/form_page.dart';
 import 'package:foodi_chefs/core/widgets/primary_button.dart';
+import 'package:foodi_chefs/features/screens/authentication/code_verification_page.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
   const ForgetPasswordPage({super.key});
@@ -15,6 +16,12 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
   _forget_password() async {
     // TODO: implement forget password logic
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder:
+            (context) => CodeVerificationPage(email: "emailaccount@mail.com"),
+      ),
+    );
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foodi_chefs/core/constants/colors.dart';
 import 'package:foodi_chefs/core/services/auth/auth_service.dart';
 import 'package:foodi_chefs/core/widgets/form_field.dart';
+import 'package:foodi_chefs/core/widgets/form_page.dart';
 import '../../../core/widgets/primary_button.dart';
 import '../../../core/di/service_locator.dart';
 
@@ -54,75 +54,61 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Positioned(
-            top: 50,
-            left: 30,
-            child: IconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              icon: Icon(Icons.arrow_back_ios),
-            ),
-          ),
-          Text("Yum X"),
-          const SizedBox(height: 100),
-          Text("Sign Up"),
-          const SizedBox(height: 20),
-          Text("Please sign up to get started"),
-          const SizedBox(height: 20),
+    return FormPage(
+      showBackButton: true,
+      title: "Sign Up",
+      subtitle: "Please sign up to get started",
+      form: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Name"),
+            const SizedBox(height: 10),
+            CustomFormField(label: "Name", fieldController: nameContoroller),
+            const SizedBox(height: 20),
 
-          Container(
-            decoration: BoxDecoration(
-              color: Color(backgroundColor),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+            Text("Email"),
+            const SizedBox(height: 10),
+            CustomFormField(label: "Email", fieldController: emailController),
+            const SizedBox(height: 20),
+
+            Text("Password"),
+            const SizedBox(height: 10),
+            CustomFormField(
+              label: "Password",
+              fieldController: password2Controller,
+              isPassword: true,
+            ),
+            const SizedBox(height: 20),
+
+            Text("Confirm Password"),
+            const SizedBox(height: 10),
+            CustomFormField(
+              label: "Confirm Password",
+              fieldController: password2Controller,
+              isPassword: true,
+            ),
+
+            const SizedBox(height: 20),
+            Center(child: PrimaryButton(label: 'Sign Up', onPressed: _signUp)),
+            SizedBox(height: 10),
+
+            Center(child: Text("Or")),
+            SizedBox(height: 10),
+            Center(
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: const Text(
+                  "Sign In instead",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
               ),
             ),
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Text("Name"),
-                const SizedBox(height: 10),
-                CustomFormField(
-                  label: "Name",
-                  fieldController: nameContoroller,
-                ),
-                const SizedBox(height: 20),
-
-                Text("Email"),
-                const SizedBox(height: 10),
-                CustomFormField(
-                  label: "Email",
-                  fieldController: emailController,
-                ),
-                const SizedBox(height: 20),
-
-                Text("Password"),
-                const SizedBox(height: 10),
-                CustomFormField(
-                  label: "Password",
-                  fieldController: password2Controller,
-                  isPassword: true,
-                ),
-                const SizedBox(height: 20),
-
-                Text("Confirm Password"),
-                const SizedBox(height: 10),
-                CustomFormField(
-                  label: "Confirm Password",
-                  fieldController: password2Controller,
-                  isPassword: true,
-                ),
-
-                const SizedBox(height: 20),
-                PrimaryButton(label: 'Login', onPressed: _signUp),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
