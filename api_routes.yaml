@@ -1,0 +1,236 @@
+openapi: 3.0.0
+info:
+  title: Chef API
+  version: 1.0.0
+  description: API for chefs to manage orders, withdrawals, food items, and payment info.
+
+paths:
+  /chef/orders:
+    get:
+      summary: Get all orders assigned to the chef
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderModel'
+
+  /chef/orders/{orderId}/accept:
+    post:
+      summary: Accept an order
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order accepted
+
+  /chef/orders/{orderId}/reject:
+    post:
+      summary: Reject an order
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order rejected
+
+  /chef/foods:
+    get:
+      summary: Get all dishes created by the chef
+      responses:
+        '200':
+          description: List of dishes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DishModel'
+    post:
+      summary: Create a new dish
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DishModel'
+      responses:
+        '201':
+          description: Dish created
+
+  /chef/foods/{dishId}:
+    put:
+      summary: Update dish information
+      parameters:
+        - in: path
+          name: dishId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DishModel'
+      responses:
+        '200':
+          description: Dish updated
+    delete:
+      summary: Delete a dish
+      parameters:
+        - in: path
+          name: dishId
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Dish deleted
+
+  /chef/foods/{dishId}/ingredients:
+    post:
+      summary: Add ingredients to a dish
+      parameters:
+        - in: path
+          name: dishId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '200':
+          description: Ingredients added
+
+  /chef/withdrawals:
+    post:
+      summary: Request a withdrawal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: float
+      responses:
+        '201':
+          description: Withdrawal request submitted
+
+  /chef/withdrawals:
+    get:
+      summary: Get all withdrawal requests and their statuses
+      responses:
+        '200':
+          description: List of withdrawal requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    amount:
+                      type: number
+                      format: float
+                    status:
+                      type: string
+                    createdAt:
+                      type: string
+                      format: date-time
+
+  /chef/bank-info:
+    get:
+      summary: Get chef's bank information
+      responses:
+        '200':
+          description: Bank info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bankName:
+                    type: string
+                  accountNumber:
+                    type: string
+                  accountName:
+                    type: string
+    post:
+      summary: Add or update chef's bank information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bankName:
+                  type: string
+                accountNumber:
+                  type: string
+                accountName:
+                  type: string
+      responses:
+        '200':
+          description: Bank information saved
+
+components:
+  schemas:
+    DishModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        price:
+          type: number
+        availableQuantity:
+          type: integer
+        isBestSeller:
+          type: boolean
+        category:
+          type: string
+        chef:
+          type: string
+    OrderModel:
+      type: object
+      properties:
+        orderId:
+          type: string
+        customerName:
+          type: string
+        orderDate:
+          type: string
+        totalAmount:
+          type: number
+        status:
+          type: string
+        deliveryAddress:
+          type: string
